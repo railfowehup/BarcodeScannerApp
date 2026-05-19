@@ -3,12 +3,12 @@ package com.barcodescanner;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -254,7 +254,13 @@ public class MainActivity extends AppCompatActivity implements BarcodeAnalyzer.B
      * 震动反馈
      */
     private void vibrate() {
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        Vibrator vibrator;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            VibratorManager vm = (VibratorManager) getSystemService(VIBRATOR_MANAGER_SERVICE);
+            vibrator = vm.getDefaultVibrator();
+        } else {
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        }
         if (vibrator != null && vibrator.hasVibrator()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
