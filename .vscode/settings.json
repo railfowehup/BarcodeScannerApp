@@ -1,0 +1,13 @@
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Program Files\\Java\\jdk-21.0.11",
+            "default": true
+        }
+    ],
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-21.0.11",
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.completion.enabled": true,
+    "java.errors.incompleteClasspath.severity": "ignore"
+}
